@@ -349,19 +349,6 @@
                 feedbackText.textContent = "❌ 不正解...";
                 feedbackText.className = "text-3xl font-bold text-red-600 mb-4 fade-in";
             }
-            });
-
-            feedbackArea.classList.remove('hidden');
-            explanationText.innerHTML = `<span class="font-bold text-blue-600 block mb-2 text-xl">【解説】</span>${currentQuiz.explanation}`;
-            
-            if (isCorrect) {
-                score++;
-                feedbackText.textContent = "⭕️ 正解！";
-                feedbackText.className = "text-2xl font-bold text-green-600 mb-3 fade-in";
-            } else {
-                feedbackText.textContent = "❌ 不正解...";
-                feedbackText.className = "text-2xl font-bold text-red-600 mb-3 fade-in";
-            }
 
             if (currentQuestionIndex < quizData.length - 1) {
                 nextBtn.classList.remove('hidden');
