@@ -49,43 +49,55 @@
         }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800 font-sans min-h-screen flex items-center justify-center p-4">
+<body class="bg-gray-100 text-gray-800 font-sans min-h-screen flex items-center justify-center p-4 lg:p-8">
 
     <!-- クイズコンテナ -->
-    <div id="quiz-container" class="bg-white rounded-xl shadow-lg p-6 md:p-8 w-full max-w-lg fade-in">
+    <div id="quiz-container" class="bg-white rounded-2xl shadow-xl p-6 md:p-8 lg:p-10 w-full max-w-6xl fade-in flex flex-col min-h-[70vh]">
         
         <!-- ヘッダー（進行状況） -->
         <div class="flex justify-between items-center mb-6 border-b pb-4">
-            <h1 class="text-2xl font-bold text-blue-600">英語文法クイズ</h1>
-            <span id="progress" class="text-base font-semibold text-gray-500 bg-gray-100 py-1 px-3 rounded-full">Question 1 / 12</span>
+            <h1 class="text-2xl md:text-3xl font-bold text-blue-600">英語文法クイズ</h1>
+            <span id="progress" class="text-base md:text-lg font-semibold text-gray-600 bg-gray-100 py-1 px-4 rounded-full">Question 1 / 12</span>
         </div>
 
-        <!-- 問題表示エリア -->
-        <div id="question-area" class="mb-8">
-            <p id="question-id-text" class="text-base text-gray-500 font-mono mb-2"></p>
-            <h2 id="question-text" class="text-3xl md:text-4xl font-bold mb-4 leading-relaxed tracking-wide text-gray-900">問題文がここに入ります。</h2>
-            <p id="translation-text" class="text-lg md:text-xl text-gray-700 font-medium bg-blue-50 p-4 rounded-md border-l-4 border-blue-400 leading-relaxed">和訳がここに入ります。</p>
-        </div>
-
-        <!-- 選択肢エリア -->
-        <div id="choices-area" class="space-y-4">
-            <!-- ボタンはJavaScriptで動的に生成されます -->
-        </div>
-
-        <!-- フィードバックエリア（正解/不正解の表示・解説） -->
-        <div id="feedback-area" class="hidden mt-6 text-center bg-gray-50 p-5 rounded-xl border border-gray-200 fade-in">
-            <p id="feedback-text" class="text-3xl font-bold mb-4"></p>
-            <div id="explanation-text" class="text-left text-gray-800 text-lg mb-6 leading-relaxed p-5 bg-white rounded-lg border border-gray-200 shadow-sm">
-                <!-- 解説がここに入ります -->
+        <!-- クイズ本体エリア (iPad横・PC等で2カラム、スマホで1カラム) -->
+        <div id="main-quiz-area" class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 flex-grow">
+            
+            <!-- 左カラム：問題表示エリア -->
+            <div id="question-area" class="flex flex-col">
+                <p id="question-id-text" class="text-base text-gray-500 font-mono mb-2"></p>
+                <h2 id="question-text" class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 lg:mb-10 leading-relaxed tracking-wide text-gray-900">問題文がここに入ります。</h2>
+                
+                <!-- 和訳エリア (左カラムの下部に配置) -->
+                <div class="mt-auto pt-6">
+                    <p class="text-sm text-blue-600 font-bold mb-1">日本語訳</p>
+                    <p id="translation-text" class="text-xl md:text-2xl text-gray-700 font-medium bg-blue-50 p-5 lg:p-6 rounded-xl border-l-4 border-blue-500 leading-relaxed shadow-sm">和訳がここに入ります。</p>
+                </div>
             </div>
-            <button id="next-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-8 text-xl rounded-xl transition-colors duration-200 hidden mx-auto w-full md:w-auto shadow-md">次の問題へ</button>
-            <button id="restart-btn" class="bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 text-xl rounded-xl transition-colors duration-200 hidden mx-auto w-full md:w-auto shadow-md">もう一度プレイ</button>
+
+            <!-- 右カラム：選択肢＆フィードバックエリア -->
+            <div class="flex flex-col justify-center">
+                <!-- 選択肢エリア -->
+                <div id="choices-area" class="space-y-4 lg:space-y-5">
+                    <!-- ボタンはJavaScriptで動的に生成されます -->
+                </div>
+
+                <!-- フィードバックエリア（正解/不正解の表示・解説） -->
+                <div id="feedback-area" class="hidden mt-6 text-center bg-gray-50 p-6 rounded-2xl border border-gray-200 fade-in shadow-inner">
+                    <p id="feedback-text" class="text-3xl font-bold mb-4"></p>
+                    <div id="explanation-text" class="text-left text-gray-800 text-lg md:text-xl mb-6 leading-relaxed p-5 bg-white rounded-xl border border-gray-200 shadow-sm">
+                        <!-- 解説がここに入ります -->
+                    </div>
+                    <button id="next-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 text-xl rounded-xl transition-all duration-200 hidden mx-auto w-full shadow-md transform hover:-translate-y-1">次の問題へ</button>
+                </div>
+            </div>
         </div>
 
         <!-- 結果表示エリア -->
-        <div id="result-area" class="hidden text-center fade-in">
-            <h2 class="text-3xl font-bold mb-4">結果発表</h2>
-            <p id="score-text" class="text-xl mb-6"></p>
+        <div id="result-area" class="hidden text-center fade-in flex flex-col items-center justify-center flex-grow py-10">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-800">結果発表</h2>
+            <p id="score-text" class="text-2xl md:text-3xl mb-10 text-gray-600"></p>
+            <button id="restart-btn" class="bg-green-500 hover:bg-green-600 text-white font-bold py-4 md:py-5 px-10 text-2xl rounded-2xl transition-all duration-200 w-full max-w-md shadow-lg transform hover:-translate-y-1">もう一度プレイ</button>
         </div>
 
     </div>
@@ -198,7 +210,7 @@
         let score = 0;
         let isAnswered = false;
 
-        // DOM要素の取得
+        const mainQuizArea = document.getElementById('main-quiz-area');
         const questionIdText = document.getElementById('question-id-text');
         const questionText = document.getElementById('question-text');
         const translationText = document.getElementById('translation-text');
@@ -262,9 +274,7 @@
             currentQuestionIndex = 0;
             score = 0;
             resultArea.classList.add('hidden');
-            questionText.parentElement.classList.remove('hidden');
-            choicesArea.classList.remove('hidden');
-            restartBtn.classList.add('hidden');
+            mainQuizArea.classList.remove('hidden');
             loadQuestion();
         }
 
@@ -272,6 +282,7 @@
             isAnswered = false;
             feedbackArea.classList.add('hidden');
             nextBtn.classList.add('hidden');
+            choicesArea.classList.remove('hidden');
 
             const currentQuiz = quizData[currentQuestionIndex];
             
@@ -293,7 +304,7 @@
                 const button = document.createElement('button');
                 button.textContent = choiceObj.text;
                 // タップ領域と文字を大きく設定
-                button.className = 'choice-btn w-full text-left bg-gray-50 border border-gray-200 hover:bg-blue-50 hover:border-blue-300 text-gray-800 font-medium py-4 px-5 text-xl rounded-xl transition-all duration-200 ease-in-out shadow-sm';
+                button.className = 'choice-btn w-full text-left bg-white border-2 border-gray-200 hover:bg-blue-50 hover:border-blue-400 text-gray-800 font-bold py-5 px-6 text-xl md:text-2xl rounded-2xl transition-all duration-200 ease-in-out shadow-sm';
                 
                 // 選択されたボタンと、そのボタンが元々持っていたインデックスを渡す
                 button.addEventListener('click', () => selectAnswer(choiceObj.originalIndex, button, shuffledChoices));
@@ -313,18 +324,31 @@
             
             allButtons.forEach((btn, index) => {
                 btn.disabled = true;
-                btn.classList.remove('hover:bg-blue-50', 'hover:border-blue-300', 'choice-btn');
+                btn.classList.remove('hover:bg-blue-50', 'hover:border-blue-400', 'choice-btn');
                 
                 // 現在のボタンの元々のインデックスを取得
                 const buttonOriginalIndex = shuffledChoices[index].originalIndex;
 
                 if (buttonOriginalIndex === currentQuiz.correctAnswer) {
-                    btn.classList.add('bg-green-100', 'border-green-400', 'text-green-800');
+                    btn.classList.add('bg-green-100', 'border-green-500', 'text-green-800', 'shadow-md');
                 } else if (btn === selectedButton && !isCorrect) {
-                    btn.classList.add('bg-red-100', 'border-red-400', 'text-red-800');
+                    btn.classList.add('bg-red-100', 'border-red-500', 'text-red-800');
                 } else {
-                    btn.classList.add('opacity-50');
+                    btn.classList.add('opacity-50', 'bg-gray-50');
                 }
+            });
+
+            feedbackArea.classList.remove('hidden');
+            explanationText.innerHTML = `<span class="font-bold text-blue-600 block mb-2 text-xl md:text-2xl">【解説】</span>${currentQuiz.explanation}`;
+            
+            if (isCorrect) {
+                score++;
+                feedbackText.textContent = "⭕️ 正解！";
+                feedbackText.className = "text-3xl font-bold text-green-600 mb-4 fade-in";
+            } else {
+                feedbackText.textContent = "❌ 不正解...";
+                feedbackText.className = "text-3xl font-bold text-red-600 mb-4 fade-in";
+            }
             });
 
             feedbackArea.classList.remove('hidden');
@@ -347,17 +371,10 @@
         }
 
         function showResult() {
-            questionText.parentElement.classList.add('hidden');
-            choicesArea.classList.add('hidden');
-            feedbackArea.classList.add('hidden');
+            mainQuizArea.classList.add('hidden');
             
             resultArea.classList.remove('hidden');
-            scoreText.innerHTML = `あなたのスコア: <br><span class="text-5xl font-bold text-blue-600 mt-2 inline-block">${score} / ${quizData.length}</span>`;
-            
-            feedbackArea.classList.remove('hidden');
-            feedbackText.textContent = "";
-            restartBtn.classList.remove('hidden');
-            nextBtn.classList.add('hidden');
+            scoreText.innerHTML = `あなたのスコア: <br><span class="text-6xl lg:text-7xl font-extrabold text-blue-600 mt-6 inline-block drop-shadow-md">${score} / ${quizData.length}</span>`;
         }
 
         nextBtn.addEventListener('click', () => {
