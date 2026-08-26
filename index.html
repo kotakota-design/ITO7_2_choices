@@ -66,7 +66,8 @@
             <!-- 左カラム：問題表示エリア -->
             <div id="question-area" class="flex flex-col">
                 <p id="question-id-text" class="text-base text-gray-500 font-mono mb-2"></p>
-                <h2 id="question-text" class="text-2xl md:text-3xl lg:text-3xl font-bold mb-6 lg:mb-8 leading-snug tracking-wide text-gray-900">問題文がここに入ります。</h2>
+                <!-- 行間を leading-relaxed に戻し、見やすさを確保 -->
+                <h2 id="question-text" class="text-2xl md:text-3xl lg:text-3xl font-bold mb-6 lg:mb-8 leading-relaxed tracking-wide text-gray-900">問題文がここに入ります。</h2>
                 
                 <!-- 和訳エリア (左カラムの下部に配置) -->
                 <div class="mt-auto pt-6">
@@ -106,10 +107,11 @@
     <script>
         // 問題データの配列 (質問, 選択肢の配列, 正解のインデックス, 問題ID)
         // a問題、b問題の順になるように整理されています
+        // 空所（アンダースコア）を短く調整しました
         const originalQuizData = [
             {
                 id: "2-1-a",
-                question: "________ you ________ her before?",
+                question: "_____ you _____ her before?",
                 translation: "前に彼女に会ったことがありますか。",
                 choices: ["Did / meet", "Have / met", "Do / meet", "Have / meeting"],
                 correctAnswer: 1,
@@ -117,7 +119,7 @@
             },
             {
                 id: "2-1-b",
-                question: "I ________ ________ her before.",
+                question: "I _____ _____ her before.",
                 translation: "私は前に彼女に会ったことがありません。",
                 choices: ["didn't / meet", "don't / meet", "haven't / met", "haven't / meet"],
                 correctAnswer: 2,
@@ -125,7 +127,7 @@
             },
             {
                 id: "2-2-a",
-                question: "When ________ he ________ the email?",
+                question: "When _____ he _____ the email?",
                 translation: "彼がそのメールを受け取ったのはいつですか。",
                 choices: ["has / received", "did / received", "did / receive", "does / receive"],
                 correctAnswer: 2,
@@ -133,7 +135,7 @@
             },
             {
                 id: "2-2-b",
-                question: "He ________ the email last night.",
+                question: "He _____ the email last night.",
                 translation: "彼は昨夜，そのメールを受け取りました。",
                 choices: ["has received", "received", "receives", "is receiving"],
                 correctAnswer: 1,
@@ -141,7 +143,7 @@
             },
             {
                 id: "2-3-a",
-                question: "When ________ the singer ________ to Japan?",
+                question: "When _____ the singer _____ to Japan?",
                 translation: "いつ，その歌手は日本にやって来ましたか。",
                 choices: ["has / come", "did / came", "did / come", "does / come"],
                 correctAnswer: 2,
@@ -149,7 +151,7 @@
             },
             {
                 id: "2-3-b",
-                question: "The singer ________ ________ Japan two years ago.",
+                question: "The singer _____ _____ Japan two years ago.",
                 translation: "その歌手は２年前に日本にやって来た。",
                 choices: ["has come to", "came in", "came to", "comes to"],
                 correctAnswer: 2,
@@ -157,7 +159,7 @@
             },
             {
                 id: "2-4-a",
-                question: "How long ________ she ________ him?",
+                question: "How long _____ she _____ him?",
                 translation: "彼女は彼と知り合ってどのくらいになりますか。",
                 choices: ["has / known", "have / known", "has / been knowing", "did / know"],
                 correctAnswer: 0,
@@ -165,7 +167,7 @@
             },
             {
                 id: "2-4-b",
-                question: "She ________ ________ him ________ four years.",
+                question: "She _____ _____ him _____ four years.",
                 translation: "彼女は彼と知り合って４年になります。",
                 choices: ["is knowing / for", "has known / for", "has known / since", "knew / for"],
                 correctAnswer: 1,
@@ -173,7 +175,7 @@
             },
             {
                 id: "2-5-a",
-                question: "How long ________ you ________ on the team?",
+                question: "How long _____ you _____ on the team?",
                 translation: "チームに入ってどのくらいになるのですか。",
                 choices: ["have / been", "did / be", "are / being", "have / joined"],
                 correctAnswer: 0,
@@ -181,7 +183,7 @@
             },
             {
                 id: "2-5-b",
-                question: "I ________ ________ the team for three years.",
+                question: "I _____ _____ the team for three years.",
                 translation: "チームに入って３年になります。",
                 choices: ["have joined", "have been on", "am joining", "was in"],
                 correctAnswer: 1,
@@ -189,7 +191,7 @@
             },
             {
                 id: "2-6-a",
-                question: "What ________ they ________ this morning?",
+                question: "What _____ they _____ this morning?",
                 translation: "彼らは今朝から何をしているのですか。",
                 choices: ["are / doing", "have / done", "have / been doing", "did / do"],
                 correctAnswer: 2,
@@ -197,7 +199,7 @@
             },
             {
                 id: "2-6-b",
-                question: "They ________ tennis ________ this morning.",
+                question: "They _____ tennis _____ this morning.",
                 translation: "彼らは今朝からずっとテニスをしています。",
                 choices: ["have played / for", "have been playing / since", "are playing / since", "played / from"],
                 correctAnswer: 1,
